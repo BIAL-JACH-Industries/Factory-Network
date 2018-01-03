@@ -30,6 +30,7 @@ public:
 
 class IPackageDepot
 {
+public:
     virtual void push(Package);
     virtual bool empty();
     virtual bool size();
@@ -38,19 +39,44 @@ class IPackageDepot
 
 class IPackageQueue : IPackageDepot
 {
-    virtual void push(Package);
+public:
     virtual Package pop();
-    virtual bool empty();
-    virtual bool size();
-    virtual Package[] view();
     virtual QueueType getQueueType();
 };
 
 class IReportNotifier
 {
+public:
     virtual bool shouldGenerateReport(Time);
 };
 
+// KLASY ABSTRAKCYJNE
+class PackageSender
+{
+    RecieverPreferences recieverPreferences;
+    std::vector<Package> sendingBuffer;
+
+public:
+    PackageSender(ElementID);
+    RecieverPreferences getReceiverPreferences();
+    void setReceiverPreferences(RecieverPreferences);
+    virtual void sendPackage() = 0;
+    std::vector<Package> getSendingBuffer();
+};
+
+class PackageDequeue
+{
+    std::deque<Package> dequeue;
+public:
+    void push(Package);
+    Package pop(void);
+    Package[] view(void);
+    virtual QueueType getQueueType() = 0;
+    bool isEmpty();
+    bool size();
+};
+
+// KLASY
 class RecieverPreferences
 {
     std::map<IPackageReciever*, double> probabilities;
@@ -65,15 +91,30 @@ public:
     pair<IPackageReciever*, double>[] view();
 };
 
-class PackageSender
+class PackageQueueLIFO : PackageDequeue
 {
-    RecieverPreferences recieverPreferences;
-    std::vector<Package> sendingBuffer;
-
 public:
-    void PackageSender(ElementID);
-    RecieverPreferences getReceiverPreferences();
-    void setReceiverPreferences(RecieverPreferences);
-    void sendPackage();
-    std::vector<Package> getSendingBuffer();
+    QueueType getQueueType();
+};
+
+class PackageQueueFIFO : PackageDequeue
+{
+public:
+    QueueType getQueueType();
+};
+
+class IntervalReportNotifier : IReportNotifier
+{
+    TimeOffset interval;
+public:
+    IntervalReportNotifier(TimeOffset);
+    bool shouldGenerateReport();
+};
+
+class SpecififTurnsReportNotifier : IReportNotifier
+{
+    std::set<Time> turns;
+public:
+    SpecififTurnsReportNotifier(std::set<Time>);
+    bool shouldGenerateReport();
 };
