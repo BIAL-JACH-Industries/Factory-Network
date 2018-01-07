@@ -118,3 +118,61 @@ public:
     SpecififTurnsReportNotifier(std::set<Time>);
     bool shouldGenerateReport();
 };
+class Factory
+{
+    std::vector<Ramp> ramps;
+    std::vector<Worker> workers;
+    std::vector<Storehouse> storehouses;
+public:
+    Ramp[] getRamps();
+    void addRamp(Ramp);
+    void removeRamp(ElementID);
+    Worker[] getWorkers();
+    void addWorker(Worker);
+    void removeWorker(ElementID);
+    Storehouse[] getStorehouses();
+    void addStorehouse(Storehouse);
+    void removeStorehouse(ElementID);
+    bool IsConsistent();
+};
+class Worker
+{
+    ElementID id;
+    TimeOffset processingDuration;
+    Time packageProcessingStartTime;
+    IPackageQueue* queue;
+public:
+    void Worker(ElementID ,TimeOffset,IPackageQueue*);
+    void recievePackage(Package);
+    Package[] viewDepot();
+    void doWork();
+    TimeOffset getProcessingDuration();
+    Time getPackageProcessingStartTime();
+    ReceiverType getReceiverType();
+    ElementID getId();
+};
+class Ramp
+{
+    ElementID id;
+    TimeOffset deliveryInterval;
+public:
+    void Ramp(ElementID, TimeOffset);
+    void deliverGoods(Time);
+    Timeoffset getDeliveryInterval();
+    ElementID getId();
+};
+class Storehouse
+{
+   ElementID id;
+   IPackageDepot* depot;
+public:
+    void Storehouse(ElementID);
+    void receivePackage(Package);
+    Package[] viewDepot();
+    ElementID getId();
+
+};
+
+
+
+
