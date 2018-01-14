@@ -13,9 +13,8 @@ class Package
     ElementID packageCounter;
 
 public:
-    Package();
     Package(ElementID);
-    inline ElementID getID(void) {return id};
+    ElementID getID();
 };
 
 //INTERFEJSY
@@ -158,7 +157,7 @@ class Ramp
 public:
     void Ramp(ElementID, TimeOffset);
     void deliverGoods(Time);
-    Timeoffset getDeliveryInterval();
+    TimeOffset getDeliveryInterval();
     ElementID getId();
 };
 class Storehouse
