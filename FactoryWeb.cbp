@@ -33,6 +33,30 @@
 		</Compiler>
 		<Unit filename="factory.cpp" />
 		<Unit filename="factory.h" />
+		<Unit filename="factory.hpp" />
+		<Unit filename="intervalreportnotifier.cpp" />
+		<Unit filename="intervalreportnotifier.hpp" />
+		<Unit filename="ipackagedepot.hpp" />
+		<Unit filename="ipackagequeue.hpp" />
+		<Unit filename="ipackagereciever.hpp" />
+		<Unit filename="ireportnotifier.hpp" />
+		<Unit filename="package.cpp" />
+		<Unit filename="package.hpp" />
+		<Unit filename="packagedequeue.cpp" />
+		<Unit filename="packagedequeue.hpp" />
+		<Unit filename="packagequeuefifo.cpp" />
+		<Unit filename="packagequeuefifo.hpp" />
+		<Unit filename="packagequeuelifo.hpp" />
+		<Unit filename="packagesender.hpp" />
+		<Unit filename="ramp.hpp" />
+		<Unit filename="recieverpreferences.hpp" />
+		<Unit filename="specificturnsreportnotifier.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="specificturnsreportnotifier.cpp" />
+		<Unit filename="specificturnsreportnotifier.hpp" />
+		<Unit filename="storehouse.hpp" />
+		<Unit filename="worker.hpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
